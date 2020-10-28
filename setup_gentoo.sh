@@ -11,7 +11,6 @@ echo "found $stage3"
 tar xpvf $stage3 --xattrs-include='*.*' --numeric-owner
 
 mkdir /mnt/gentoo/etc/portage/backup
-unzip /mnt/gentoo/gentootestscript-master/gentoo/portage.zip
 #mv /mnt/gentoo/etc/portage/make.conf /mnt/gentoo/etc/portage/backup/
 echo "moved old make.conf to /backup/"
 #copies our pre-made make.conf over
