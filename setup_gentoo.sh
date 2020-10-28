@@ -11,26 +11,26 @@ echo "found $stage3"
 tar xpvf $stage3 --xattrs-include='*.*' --numeric-owner
 
 mkdir /mnt/gentoo/etc/portage/backup
-#mv /mnt/gentoo/etc/portage/make.conf /mnt/gentoo/etc/portage/backup/
+mv /mnt/gentoo/etc/portage/make.conf /mnt/gentoo/etc/portage/backup/
 echo "moved old make.conf to /backup/"
 #copies our pre-made make.conf over
-cp /mnt/gentoo/portage/make.conf /mnt/gentoo/etc/portage/
+cp /mnt/gentoo/gentootestscript-master/gentoo/portage/make.conf /mnt/gentoo/etc/portage/
 echo "copied new make.conf to /etc/portage/"
 
 #copies specific package.use stuff over
-cp -a /mnt/gentoo/portage/package.use/. /mnt/gentoo/etc/portage/package.use/
+cp -a /mnt/gentoo/gentootestscript-master/gentoo/portage/package.use/. /mnt/gentoo/etc/portage/package.use/
 echo "copied over package.use files to /etc/portage/package.use/"
 
 #copies specific package stuff over (this might not be necessary)
-cp /mnt/gentoo/portage/linux_drivers /mnt/gentoo/etc/portage/
-cp /mnt/gentoo/portage/nvidia_package.license /mnt/gentoo/etc/portage/
-cp /mnt/gentoo/portage/package.license /mnt/gentoo/etc/portage
-cp /mnt/gentoo/portage/package.accept_keywords /mnt/gentoo/etc/portage/
+cp /mnt/gentoo/gentootestscript-master/gentoo/portage/linux_drivers /mnt/gentoo/etc/portage/
+cp /mnt/gentoo/gentootestscript-master/gentoo/portage/nvidia_package.license /mnt/gentoo/etc/portage/
+cp /mnt/gentoo/gentootestscript-master/gentoo/portage/package.license /mnt/gentoo/etc/portage
+cp /mnt/gentoo/gentootestscript-master/gentoo/portage/package.accept_keywords /mnt/gentoo/etc/portage/
 echo "copied over specific package stuff"
 
 #gentoo ebuild repository
 mkdir --parents /mnt/gentoo/etc/portage/repos.conf
-cp /mnt/gentoo/usr/share/portage/config/repos.conf /mnt/gentoo/etc/portage/repos.conf/gentoo.conf
+cp /usr/share/portage/config/repos.conf /mnt/gentoo/etc/portage/repos.conf/gentoo.conf
 
 echo "copied gentoo repository to repos.conf"
 
@@ -48,8 +48,6 @@ mount --make-rslave /mnt/gentoo/sys
 mount --rbind /dev /mnt/gentoo/dev
 mount --make-rslave /mnt/gentoo/dev
 
-rm -rf /portage
-echo "claened up files"
 echo "mounted all the things"
 echo "you should now chroot into the new environment"
 chroot /mnt/gentoo post_chroot.sh
