@@ -59,9 +59,6 @@ app-misc/binwalk
 
 #regular tools
 app-admin/keepassxc
-#app-editors/vim
+app-editors/nano
 net-im/signal-desktop-bin
-www-client/firefox
 net-misc/youtube-dl
-#media-video/mpv
-media-gfx/gimp
