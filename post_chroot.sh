@@ -14,8 +14,6 @@ read username
 username="${username,,}"
 printf ${LIGHTBLUE}"Do you want to migrate openssl to libressl?\n"
 read sslmigrateanswer
-printf ${LIGHTBLUE}"Enter Yes to make a kernel from scratch, edit to edit the hardened config, or No to use the default hardened config\n"
-read kernelanswer
 printf ${LIGHTBLUE}"Enter the Hostname you want to use\n"
 read hostname
 
@@ -64,33 +62,7 @@ eselect locale set 4
 env-update && source /etc/profile && export PS1="(chroot) ${PS1}"
 
 #Installs the kernel
-emerge sys-kernel/gentoo-sources
-cd /usr/src/linux
-emerge sys-apps/pciutils
-emerge lzop
-emerge app-arch/lz4
-printf "Do you want to configure your own kernel?\n"
-if [ $kernelanswer = "No" ]; then
-	cp /gentootestscript-master/gentoo/kernel/gentoohardenedminimal /usr/src/linux
-	mv gentoohardenedminimal .config
-	make oldconfig
-	make && make modules_install
-	make install
-	printf "Kernel installed\n"
-elif [ $kernelanswer = "edit" ]; then
-	cp /gentootestscript-master/gentoo/kernel/gentoohardenedminimal /usr/src/linux
-	mv gentoohardenedminimal .config
-	make menuconfig
-	make && make modules_install
-	make install
-	printf "Kernel installed\n"
-else
-	printf "time to configure your own kernel\n"
-	make menuconfig
-	make && make modules_installl
-	make install
-	printf "Kernel installed\n"
-fi
+emerge sys-kernel/gentoo-kernel-bin
 
 #enables DHCP
 sed -i -e "s/localhost/$hostname/g" /etc/conf.d/hostname
